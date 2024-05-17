@@ -1,0 +1,7 @@
+altgraph==0.17.4
+macholib==1.16.3
+packaging==24.0
+pyinstaller==6.6.0
+pyinstaller-hooks-contrib==2024.6
+PyMuPDF==1.24.4
+PyMuPDFb==1.24.3

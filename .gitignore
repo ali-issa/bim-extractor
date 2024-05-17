@@ -1,0 +1,7 @@
+.DS_Store
+.mypy_cache
+build
+dist
+sample.pdf
+main.spec
+main
