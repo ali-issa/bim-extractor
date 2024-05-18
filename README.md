@@ -37,7 +37,7 @@ pip install -r requirements.txt
 You can run the script directly using Python:
 
 ```bash
-python extractor.py
+python bim_extractor.py
 ```
 
 ### Building the Executable
@@ -47,10 +47,10 @@ To distribute the script as an executable file for non-technical users, you can 
 1. **Build the executable**:
 
 ```bash
-pyinstaller --onefile --windowed extractor.py
+pyinstaller --onefile --windowed bim_extractor.py
 ```
 
-The executable will be created in the `dist` directory. Distribute the executable file (`extractor` or `extractor.exe` on Windows) to users. They can run it by double-clicking the file.
+The executable will be created in the `dist` directory. Distribute the executable file (`bim_extractor` or `bim_extractor.exe` on Windows) to users. They can run it by double-clicking the file.
 
 ## Notes
 
