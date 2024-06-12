@@ -15,32 +15,36 @@ def extract_data_from_pdf(pdf_path):
     document = fitz.open(pdf_path)
     extracted_data = []
 
+    segment = None
+    id_liste_de_controle = None
+    number_of_ring = None
+
     for page_num in range(len(document)):
         page = document.load_page(page_num)
         lines = page.get_text("text").split("\n")
-
-        segment = None
-        id_liste_de_controle = None
-        number_of_ring = None
 
         for i, line in enumerate(lines):
             stripped_line = line.strip()
             if stripped_line == "installé":
                 segment = lines[i + 1].strip()
             elif stripped_line == "création":
-                id_liste_de_controle = format_id(lines[i + 1].strip())
+                if lines[i + 1].strip().isnumeric():
+                    id_liste_de_controle = format_id(lines[i + 1].strip())
             elif "Numéro de l'anneau / Number of the ring" in stripped_line:
                 number_of_ring = lines[i + 1].strip()
-                if segment and id_liste_de_controle and number_of_ring:
-                    extracted_data.append(
-                        [
-                            number_of_ring,
-                            segment,
-                            id_liste_de_controle,
-                            os.path.basename(pdf_path),
-                        ]
-                    )
-                    segment = id_liste_de_controle = number_of_ring = None
+
+                # Add to extracted_data if all components are available
+                extracted_data.append(
+                    [
+                        number_of_ring,
+                        segment,
+                        id_liste_de_controle,
+                        os.path.basename(pdf_path),
+                    ]
+                )
+
+                # Reset variables after appending to ensure new data is collected correctly
+                segment = id_liste_de_controle = number_of_ring = None
 
     document.close()
     print(f"Processed {pdf_path}")
